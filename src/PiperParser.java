@@ -10,40 +10,54 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PiperParser extends StringUtility {
+public class PiperParser{
 
     private static StringUtility s = new StringUtility();
 
     public String url = "http://webapps.macalester.edu/dailypiper/dailypiper-portal.cfm?expanded=true";
 
+    private static List<PiperEvent> allPiperEvents = new ArrayList<PiperEvent>();
+
     public static void main(String[] args) throws Exception {
-        List<String> finalList = new ArrayList<String>();
+        List<String> eventList = new ArrayList<String>();
         String url = "http://webapps.macalester.edu/dailypiper/dailypiper-portal.cfm?expanded=true";
         Document doc = Jsoup.connect(url).get();
         String fullPage = doc.toString();
-        String[] subStringArray = s.stringSegment(fullPage);
+        String[] possibleEventArray = s.stringSegment(fullPage);
         int numStories = 0;
 
-        for (String subString : subStringArray) {
-            boolean isStory = s.isStory(subString);
-            //System.out.println("-----------------NEW SUBSTRING!-----------------");
-            //System.out.println("is this a story? " + isStory);
+        for (String possibleEvent : possibleEventArray) {
+            boolean isStory = s.isStory(possibleEvent);
             if (isStory) {
-                finalList.add(subString);
+                eventList.add(possibleEvent);
             }
-            //System.out.println(subString);
         }
 
-        for (String subString : finalList){
-            numStories ++;
+        for (String subString : eventList){
+
+//            String title = s.titleFinder(subString);
+//
+//            String body = s.bodyFinder(subString);
             System.out.println("-----------------NEW SUBSTRING!-----------------");
-            //System.out.println(subString);
             String words = s.cleanup(subString);
+
             System.out.println(words);
 
+//            PiperEvent event = new PiperEvent(title,body);
+//            allPiperEvents.add(event);
+
         }
 
-        //System.out.println("There are " + numStories + " stories!");
+//        for ( PiperEvent event : allPiperEvents ){
+//
+//            String title = event.getTitle();
+//            String body = event.getBody();
+//
+//            System.out.println("TITLE: " + title);
+//            System.out.println("BODY: " + body);
+//        }
+//
+//        System.out.println("There are " + numStories + " stories!");
 
 
     }
