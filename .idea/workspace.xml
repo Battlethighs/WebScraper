@@ -466,17 +466,21 @@
       <changelist id="5bd418c4-32b0-464a-a0df-8512536edb9a" name="Default" comment="" />
       <created>1393990215965</created>
       <updated>1393990215965</updated>
-      <workItem from="1393990220685" duration="526000" />
+      <workItem from="1393990220685" duration="541000" />
     </task>
     <task id="LOCAL-00001" summary="why so many messages always">
       <created>1393990712593</created>
       <updated>1393990712593</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="why so many messages always&#10;">
+      <created>1393990751068</created>
+      <updated>1393990751069</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="526000" />
+    <option name="totallyTimeSpent" value="541000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="476" y="38" width="1869" height="1342" extended-state="0" />
@@ -523,7 +527,8 @@
       <TodoPanelSettings />
     </option>
     <MESSAGE value="why so many messages always" />
-    <option name="LAST_COMMIT_MESSAGE" value="why so many messages always" />
+    <MESSAGE value="why so many messages always&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="why so many messages always&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
