@@ -36,11 +36,9 @@ public class PiperParser{
         for (String subString : eventList){
 
 //            String title = s.titleFinder(subString);
-//
 //            String body = s.bodyFinder(subString);
             System.out.println("-----------------NEW SUBSTRING!-----------------");
             String words = s.cleanup(subString);
-
             System.out.println(words);
 
 //            PiperEvent event = new PiperEvent(title,body);
