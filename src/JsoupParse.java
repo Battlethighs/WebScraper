@@ -1,4 +1,5 @@
 
+import com.sun.xml.internal.bind.v2.TODO;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -6,10 +7,13 @@ import org.jsoup.select.Elements;
 import javax.print.Doc;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.LinkedList;
 import java.util.List;
 
 public class JsoupParse {
+
+    private static List<PiperEvent> eventList = new LinkedList<PiperEvent>();
 
     private static String extractText(String input) {
         int length = input.length();
@@ -66,10 +70,28 @@ public class JsoupParse {
                 break;
             }
         }
-        System.out.println("Length is: " + length + " flag is: "+ flag);
+        //System.out.println("Length is: " + length + " flag is: "+ flag);
         String output = input.substring(0,flag+1);
         return output;
 
+    }
+
+    //TODO: FINISH THIS METHOD
+    private static String removeSpaces(String input){
+        return "";
+    }
+
+    private static String removeChars(String input){
+        List<String> toRemove = new LinkedList<String>();
+        toRemove.add("\n");
+        toRemove.add("\t");
+        toRemove.add("&nbsp;");
+        toRemove.add("&raquo");
+
+        for (String uglyWord : toRemove){
+            input = input.replaceAll(uglyWord," ");
+        }
+        return input;
     }
 
     public static void main(String[] args) throws Exception {
@@ -92,9 +114,32 @@ public class JsoupParse {
             segment = removeLeadingSpace(segment);
             String title = findTitle(segment);
             if ( title != null){
-                title = removeEndingSpace(title);
-                System.out.println("-----------------" + "\n" + title);
-                //System.out.println("-----------------" + segment);
+                title = removeEndingSpace(removeChars(title));
+                segment = removeEndingSpace(removeChars(segment));
+
+                PiperEvent event = new PiperEvent(title,segment);
+                eventList.add(event);
+
+                //System.out.println("-----------------" + "\n" + title);
+                //System.out.println("-----------------" + "\n" + segment);
+            }
+        }
+
+        for (PiperEvent event : eventList){
+            if (event.getHasFood()){
+
+                String title = event.getTitle();
+                String description = event.getDescription();
+                String time = event.getTime();
+                String place = event.getPlace();
+
+                System.out.println("-------------------------------");
+                System.out.println("TITLE: " + title + "\n");
+                System.out.println("DESCRIPTION: " + description + "\n");
+                System.out.println("TIME: " + time + "\n");
+                System.out.println("PLACE: " + place + "\n");
+
+
             }
         }
     }
