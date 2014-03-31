@@ -16,26 +16,28 @@ public class PiperEvent {
 
         this.title = title;
         //TODO add case sensitivity
-        foodWords.add("breakfast");
-        foodWords.add("lunch");
-        foodWords.add("dinner");
-        foodWords.add("snack");
-        foodWords.add("refreshments");
-        foodWords.add("pie ");
-        foodWords.add("cake");
+        foodWords.add("[Bb]reakfast");
+        foodWords.add("[Ll]unch");
+        foodWords.add("[Dd]inner");
+        foodWords.add("[Ss]nack");
+        foodWords.add("[Rr]efreshments");
+        foodWords.add("[Pp]ie ");
+        foodWords.add("[Cc]ake");
         foodWords.add("ice cream");
-        foodWords.add("tea");
-        foodWords.add("coffee");
-        foodWords.add("chocolate");
-        foodWords.add("candy");
-        foodWords.add("drinks");
-        foodWords.add("pizza");
+        foodWords.add("[Tt]ea");
+        foodWords.add("[Cc]offee");
+        foodWords.add("[Cc]hocolate");
+        foodWords.add("[Cc]andy");
+        foodWords.add("[Dd]rinks");
+        foodWords.add("[Pp]izza");
 
-        placeWords.add("Olin-Rice");
+        placeWords.add("[Oo]lin-Rice");
         placeWords.add("Carnegie");
-        placeWords.add("campus center");
+        placeWords.add("[Cc]ampus [Cc]enter");
 
         timeWords.add("noon");
+        timeWords.add("[0-9][\\:][0-9][0-9]");
+        timeWords.add("[0-9] [pa]\\.m");
 
         //TODO add regex for other forms of punctuation
         String[] sentences = body.split("\\.");
@@ -43,11 +45,15 @@ public class PiperEvent {
         for ( String foodWord : foodWords ){
             boolean breakFlag = false;
             for ( String sentence : sentences ){
-                if ( sentence.contains(foodWord) ){
-                    this.hasFood = true;
-                    this.description = sentence;
-                    breakFlag = true;
-                    break;
+                String[] words = sentence.split(" ");
+                for ( String word : words){
+                    if(word.matches(foodWord)){
+                    System.out.println(foodWord);
+                        this.hasFood = true;
+                        this.description = sentence;
+                        breakFlag = true;
+                        break;
+                    }
                 }
             }
             if (breakFlag) {
