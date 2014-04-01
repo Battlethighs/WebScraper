@@ -143,4 +143,8 @@ public class JsoupParse {
             }
         }
     }
+
+    public List<PiperEvent> returnEvents(){
+        return eventList;
+    }
 }
